@@ -49,4 +49,27 @@ class BodyMassIndexTest {
         assertEquals(cat, " (Obese)");
     }
 
+    @Test
+    void getH(){
+        tester = new BodyMassIndex(67, 152);
+        assertEquals(tester.getHeight(), 67);
+    }
+
+    @Test
+    void getW(){
+        tester = new BodyMassIndex(67, 152);
+        assertEquals(tester.getWeight(), 152);
+    }
+
+    @Test
+    void getB(){
+        tester = new BodyMassIndex(67, 152);
+        assertEquals(tester.getBmi(), 23.80396524838494);
+    }
+
+    @Test
+    void getBR(){
+        tester = new BodyMassIndex(67, 152);
+        assertEquals(tester.getBmi(), 23.8);
+    }
 }

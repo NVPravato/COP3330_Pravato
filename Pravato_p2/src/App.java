@@ -40,9 +40,9 @@ public class App {
         double total = 0;
         for(int i = 0; i <= bmiData.size() - 1; i++){
             temp = (bmiData.get(i));
-            temp.bmi = (Math.round(temp.bmi*10.0)/10.0);//Rounds before averaging
+            //temp.bmi = (Math.round(temp.bmi*10.0)/10.0);//Rounds before averaging
             //System.out.println(temp.bmi);
-            total += temp.bmi;
+            total += temp.getBmiRounded();
             //System.out.println(bmiData.get(i).bmi);
             //total += bmiData.get(i).bmi;
 
@@ -60,9 +60,9 @@ public class App {
         //double bmiRounded = (Math.round(bmi.bmi*10.0)/10.0);
         //^^^ I just realized I'm supposed to do this in a method in BodyMassIndex so I commented this out
 
-        double bmiRounded = (Math.round(bmi.calcBmi(bmi.height, bmi.weight)*10.0)/10.0);
+        double bmiRounded = (Math.round(bmi.calcBmi(bmi.getHeight(), bmi.getWeight())*10.0)/10.0);
         System.out.print("BMI: " + bmiRounded);
-        System.out.println(" " + bmi.calcCat(bmi.height, bmi.weight));
+        System.out.println(" " + bmi.calcCat(bmi.getHeight(), bmi.getWeight()));
 
 
         /*

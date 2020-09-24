@@ -2,9 +2,9 @@ import java.io.*;
 import java.util.*;
 
 public class BodyMassIndex {
-    public double bmi;
-    public double height;
-    public double weight;
+    private double bmi;
+    private double height;
+    private double weight;
 
 
     BodyMassIndex(double height, double weight){
@@ -47,7 +47,7 @@ public class BodyMassIndex {
         return cat;
     }
 
-    /*
+
     public double getHeight(){
         return height;
     }
@@ -60,5 +60,9 @@ public class BodyMassIndex {
     public double getBmi(){
         return bmi;
     }
-     */
+
+    public double getBmiRounded(){
+        return Math.round(bmi*10.0)/10.0;
+    }
+
 }
