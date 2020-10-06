@@ -2,7 +2,10 @@ public abstract class Shape {
     protected String name;
     protected double area;
     protected double volume;
-
+    public abstract double getArea();
+    public abstract String getName();
+    public abstract double getVolume();
+    /*
     public String getName(){
         return name;
     }
@@ -11,9 +14,11 @@ public abstract class Shape {
         return area;
     }
 
+
     public double getVolume(){
         return volume;
     }
+     */
 
 
 
@@ -22,7 +27,8 @@ public abstract class Shape {
 
 abstract class Shape2D extends  Shape {
 
-
+    public abstract double getArea();
+    public abstract String getName();
 
 }
 
@@ -52,8 +58,24 @@ class Square extends Shape2D{
         name = nameS;
     }
 
+
+
     public void setArea(){
         area = areaS;
+    }
+
+
+    public String getName(){
+        return name;
+    }
+
+    public double getArea(){
+
+        return area;
+    }
+
+    public double getVolume(){
+        return 0;
     }
 
 }
@@ -88,7 +110,18 @@ class Triangle extends Shape2D{
         area = areaT;
     }
 
+    public String getName(){
+        return name;
+    }
 
+    public double getArea(){
+
+        return area;
+    }
+
+    public double getVolume(){
+        return 0;
+    }
 }
 
 class Circle extends Shape2D{
@@ -119,12 +152,23 @@ class Circle extends Shape2D{
         area = areaC;
     }
 
+    public String getName(){
+        return name;
+    }
 
+    public double getArea(){
+
+        return area;
+    }
+    public double getVolume(){
+        return 0;
+    }
 }
 
 abstract class Shape3D extends  Shape {
-
-
+    public abstract double getArea();
+    public abstract String getName();
+    public abstract double getVolume();
 
 }
 
@@ -168,6 +212,18 @@ class Cube extends Shape3D{
         volume = volumeCu;
     }
 
+    public String getName(){
+        return name;
+    }
+
+    public double getArea(){
+
+        return area;
+    }
+
+    public double getVolume(){
+        return volume;
+    }
 }
 
 class Pyramid extends Shape3D{
@@ -215,6 +271,18 @@ class Pyramid extends Shape3D{
         volume = volumeP;
     }
 
+    public String getName(){
+        return name;
+    }
+
+    public double getArea(){
+
+        return area;
+    }
+
+    public double getVolume(){
+        return volume;
+    }
 }
 
 class Sphere extends Shape3D{
@@ -257,4 +325,16 @@ class Sphere extends Shape3D{
         volume = volumeSp;
     }
 
+    public String getName(){
+        return name;
+    }
+
+    public double getArea(){
+
+        return area;
+    }
+
+    public double getVolume(){
+        return volume;
+    }
 }
