@@ -1,52 +1,42 @@
+import java.lang.reflect.Array;
 import java.util.*;
 import java.io.*;
-import java.nio.*;
+import java.nio.file.*;
 
-public class TaskList implements Serializable {
+public class TaskList {
+
     private static ArrayList<TaskItem> ti = new ArrayList<TaskItem>();
 
 
-    public TaskList(){
-
-    }
-
-    public static void addTask(TaskItem task){
-
-        ti.add(task);
-
-    }
-
-    public static void removeTask(TaskItem task){
-
-        ti.remove(task);
+    public TaskList() {
 
     }
 
 
-    public static void viewList(){
+    public static void viewList() {
         System.out.println("Current Tasks\n-----------");
 
-        for(int i = 0; i < ti.size(); i++){
+        for (int i = 0; i < ti.size(); i++) {
             System.out.println(i + ") " + ti.get(i).toString());
         }
 
     }
 
-    public static void viewComp(){
+    public static void viewComp() {
         System.out.println("Current Completed Tasks\n-----------");
 
-        for(int i = 0; i < ti.size(); i++){
-            if(ti.get(i).getCompleted() == true){
+        for (int i = 0; i < ti.size(); i++) {
+            if (ti.get(i).getCompleted() == true) {
                 System.out.println(i + ") " + ti.get(i).toString());
             }
         }
     }
 
-    public static void viewUncomp(){
+    public static void viewUncomp() {
         System.out.println("Current Uncompleted Tasks\n-----------");
 
-        for(int i = 0; i < ti.size(); i++){
-            if(ti.get(i).getCompleted() == false){
+        for (int i = 0; i < ti.size(); i++) {
+            if (ti.get(i).getCompleted() == false) {
                 System.out.println(i + ") " + ti.get(i).toString());
             }
 
@@ -54,27 +44,68 @@ public class TaskList implements Serializable {
     }
 
 
-    public static void addItem(){
+    public static void addItem(String itemT, String itemDesc, String itemDue) {
         TaskItem temp = new TaskItem();
         //String user = userIn();
+        boolean valid = true;
+        //valid = temp.setTitle();
+        //temp.setTitle();
+        //temp.setDesc();
+        //valid = temp.setDue();
+        //temp.setDue();
 
-        temp.setTitle();
-        temp.setDesc();
-        temp.setDue();
-        ti.add(temp);
-        System.out.println("Task Created.");
+        boolean validT = false;
+        boolean validDesc = false;
+        boolean validDue = false;
+        try{
+            validT = temp.setTitle(itemT);
+            if(validT){
+                validDesc = temp.setDesc(itemDesc);
+                validDue = temp.setDue(itemDue);
+            }
+        }catch(InputMismatchException e){
+            e.printStackTrace();
+        }
+
+
+
+
+
+
+        if(validT && validDesc && validDue){
+            ti.add(temp);
+            System.out.println("Task Created.");
+        }else{
+            System.out.println("Error: Task not created");
+        }
     }
 
-    public static void setEditItem(int index){
+    public static void setEditItem(int index, String itemT, String itemDesc, String itemDue) {
         TaskItem temp = new TaskItem();
         //String user = userIn();
+        boolean validT = false;
+        boolean validDesc = false;
+        boolean validDue = false;
 
-        temp.setTitle();
-        temp.setDesc();
-        temp.setDue();
+        try{
+            validT = temp.setTitle(itemT);
+            if(validT){
+                validDesc = temp.setDesc(itemDesc);
+                validDue = temp.setDue(itemDue);
+            }
+        }catch(InputMismatchException e){
+            e.printStackTrace();
+        }
 
-        ti.set(index, temp);
-        System.out.println("Task " + index + " changed.");
+
+        if(validT && validDesc && validDue){
+            ti.set(index, temp);
+            System.out.println("Task " + index + " changed.");
+        }else{
+            System.out.println("Error: Task not changed");
+        }
+
+
     }
 
     /*
@@ -86,66 +117,117 @@ public class TaskList implements Serializable {
     }
     */
 
-    public static void editItem(){
-        Scanner scan = new Scanner(System.in);
-        viewList();
-        System.out.println("Which task do you want to edit? (enter number):");
-        int edit = 0;
-        try{
-            edit = scan.nextInt();
 
-        }catch(InputMismatchException e){
-            System.out.println(e);
-        }
 
-        setEditItem(edit);
 
+    public static void removeItem(int index) throws IndexOutOfBoundsException {
+
+            ti.remove(index);
 
     }
 
 
+    public static void complete(int index) throws IndexOutOfBoundsException{
+        //Scanner scan = new Scanner(System.in);
 
-    public static void removeItem(){
-        Scanner scan = new Scanner(System.in);
-        viewList();
-        System.out.println("Which task do you want to remove? (enter number):");
-        int remove = 0;
-        try{
-            remove = scan.nextInt();
-
-        }catch(InputMismatchException e){
-            System.out.println(e);
+        if (ti.get(index).getCompleted() != false) {
+            throw new IndexOutOfBoundsException();
         }
 
-        ti.remove(remove);
+            ti.get(index).setCompleted(true);
+
+
+
+
+
+
     }
 
+    public static void uncomplete(int index) throws IndexOutOfBoundsException,  InputMismatchException{
 
-    public static void complete(){
-        Scanner scan = new Scanner(System.in);
-        System.out.println("Which task do you want to complete? (enter number)");
-        viewUncomp();
-        int index = 0;
-        try{
-            index = scan.nextInt();
+        if (ti.get(index).getCompleted() != true) {
 
-        }catch(InputMismatchException e){
-            System.out.println(e);
+            throw new InputMismatchException();
+
         }
-        ti.get(index).setCompleted(true);
-    }
 
-    public static void uncomplete(){
-        Scanner scan = new Scanner(System.in);
-        System.out.println("Which task do you want to un-complete? (enter number)");
-        viewComp();
-        int index = 0;
-        try{
-            index = scan.nextInt();
-
-        }catch(InputMismatchException e){
-            System.out.println(e);
-        }
         ti.get(index).setCompleted(false);
+
+    }
+
+
+    public static void AccessSaveFile(String fileName) throws IOException{
+        saveFile(fileName);
+    }
+
+    private static void saveFile(String fileName) throws IOException{
+        PrintWriter write = new PrintWriter(new File(fileName));
+        for (TaskItem item : ti) {
+            write.println(item.toString());
+        }
+        write.close();
+
+        System.out.println("Task list has been saved");
+
+
+        /*
+        System.out.println("Enter Directory to Save This List");
+        Path path = Paths.get(scan.nextLine());
+         */
+    }
+
+
+    public static void readFile(String fileName){
+        boolean fileLoaded = false;
+        while(fileLoaded == false) {
+
+            try {
+                Scanner fin = new Scanner(new File(fileName));
+                ti.clear();
+                while (fin.hasNextLine()) {
+                    String line = fin.nextLine();
+                    System.out.println(line);
+                    boolean completed = false;
+                    if (line.charAt(0) == '*') {
+                        completed = true;
+                        line = line.substring(4);
+                    }
+                    String date = line.substring(1, 11);
+                    line = line.substring(13);
+                    int colonIndex = line.indexOf(':');
+                    String title = line.substring(0, colonIndex);
+                    String desc = line.substring(colonIndex + 2);
+
+                    TaskItem item = new TaskItem();
+                    item.setDue2(date);
+                    item.setDesc2(desc);
+                    item.setCompleted(completed);
+                    item.setTitle2(title);
+
+                    ti.add(item);
+
+                }
+
+                fileLoaded = true;
+            } catch (IOException e) {
+                System.out.println("An error occurred. File not loaded.");
+            }
+        }
+
+
+
+    }
+
+
+    public static int getLength(){
+        return ti.size();
+    }
+
+    public static boolean getEmpty(){
+        return ti.isEmpty();
     }
 }
+
+
+
+
