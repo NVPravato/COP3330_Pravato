@@ -27,7 +27,7 @@ class TaskItemTest {
     void creatingTaskItemFailsWithInvalidTitle(){
         TaskItem test = new TaskItem();
         assertThrows(InputMismatchException.class, () -> {
-            test.setDue("2020-1");
+            test.setTitle("");
         });
     }
 
@@ -40,27 +40,38 @@ class TaskItemTest {
 
     @Test
     void creatingTaskItemSucceedsWithValidTitle(){
-
+        TaskItem test = new TaskItem();
+        test.setTitle("t1");
+        assertEquals("t1", test.getTitle());
     }
 
     @Test
     void settingTaskItemDueDateFailsWithInvalidDate(){
+        TaskItem test = new TaskItem();
 
+        assertThrows(InputMismatchException.class,()->{test.setDue("2020-13-10");});
+        //assertEquals("2020-10-10", test.getDue());
     }
 
     @Test
     void settingTaskItemDueDateSucceedsWithValidDate(){
-
+        TaskItem test = new TaskItem();
+        test.setDue("2020-10-10");
+        assertEquals("2020-10-10", test.getDue());
     }
 
     @Test
     void settingTaskItemTitleFailsWithInvalidTitle(){
+        TaskItem test = new TaskItem();
 
+        assertThrows(InputMismatchException.class,()->{test.setTitle("");});
     }
 
     @Test
     void settingTaskItemTitleSucceedsWithValidTitle(){
-
+        TaskItem test = new TaskItem();
+        test.setTitle("t1");
+        assertEquals("t1", test.getTitle());
     }
 
 

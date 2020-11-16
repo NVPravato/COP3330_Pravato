@@ -159,9 +159,9 @@ public class TaskItem {
                 }
                 if (input.charAt(5) == '1' && input.charAt(6) > '2') {
 
-                    System.out.println("Please enter a valid month (1-12).\n");
+                    throw new InputMismatchException("Invalid Date");
                 } else if (input.charAt(8) == '3' && input.charAt(9) > '1') {
-                    System.out.println("Please enter a valid day (1-31).\n");
+                    throw new InputMismatchException("Invalid Date");
 
                 }
             }

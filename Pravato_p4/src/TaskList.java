@@ -226,6 +226,16 @@ public class TaskList {
     public static boolean getEmpty(){
         return ti.isEmpty();
     }
+
+    public static TaskItem getListItem(int index) throws IndexOutOfBoundsException {
+        boolean valid = false;
+                return ti.get(index);
+
+    }
+
+    public static void clear(){
+        ti.clear();
+    }
 }
 
 
