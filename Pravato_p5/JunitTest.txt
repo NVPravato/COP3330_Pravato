@@ -1,0 +1,6 @@
+Name: Nick Pravato
+Phone: 123-456-7890
+Email: npravato@knights.ucf.edu
+Name: Kcin Otavarp
+Phone: 098-765-4321
+Email: knights@npravato.edu.ucf
