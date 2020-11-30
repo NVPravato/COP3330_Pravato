@@ -1,6 +1,0 @@
-Name: asdfasdf
-Phone: N/A 
-Email: N/A
-Name: hellopoo
-Phone: 999-999-9999 
-Email: pee@pee.poopoo
